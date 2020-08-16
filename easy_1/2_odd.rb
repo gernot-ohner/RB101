@@ -12,7 +12,7 @@
 # A: should still work (well, it's ruby, so don't worry)
 
 def is_odd?(n)
-  (n > 0 ? n : -n) % 2 == 1
+  n % 2 == 1
 end
 
 # Test cases
@@ -30,7 +30,7 @@ p is_odd?( -10000000000000000000000000000000000000000000000000000000000000000000
 # That means it has the desired behavior for negative numbers anyway, even without taking the absolute value.
 
 def is_other_odd?(n)
-  (n > 0 ? n : -n).remainder(2) == 1
+  n.abs.remainder(2) == 1
 end
 
 p is_other_odd?(0) == false
