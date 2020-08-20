@@ -1,0 +1,38 @@
+{
+  "en": {
+    "invalid_number": "That's not a valid number.",
+    "case_fail": "This shouldn't happen.",
+    "welcome": "Welcome to calculator!",
+    "enter_first_number" : "Enter the first number: ",
+    "enter_second_number" : "Enter the second number: ",
+    "invalid_operator" : "That is not a valid operator",
+    "the_two_numbers" : "the two numbers.",
+    "calculate_again" : "Do you want to perform another calculation? (Y to calculate again)",
+    "goodbye" : "Thank you for using the calculator! Goodbye!",
+    "operation" : {
+      "1" : "Adding",
+      "2" : "Subtracting",
+      "3" : "Multiplying",
+      "4" : "Dividing"
+    },
+    "operator_prompt": "What operation would you like to perform?\n    1) add\n    2) subtract\n    3) multiply\n    4) divide"
+  },
+  "de": {
+    "invalid_number": "Das ist keine valide Zahl.",
+    "case_fail": "Das sollte nicht passieren.",
+    "welcome": "Willkommen zum Taschenrechner!",
+    "enter_first_number" : "Geben Sie die erste Zahl ein: ",
+    "enter_second_number" : "Geben Sie die zweite Zahl ein: ",
+    "invalid_operator" : "Das ist kein valider Operator.",
+    "the_two_numbers" : "die beiden Zahlen",
+    "calculate_again" : "Möchten Sie eine weitere Berechnung starten? (Y um nochmal zu rechnen)",
+    "goodbye" : "Vielen Dank, dass sie den Taschenrechner verwendet haben! Auf Wiedersehen!",
+    "operation" : {
+      "1" : "Addiere",
+      "2" : "Subtrahiere",
+      "3" : "Multipliziere",
+      "4" : "Dividiere"
+    },
+    "operator_prompt": "Welche Operation möchten Sie durchführen?\n    1) addieren\n    2) subtrahieren\n    3) multiplizieren\n    4) dividieren"
+  }
+}
