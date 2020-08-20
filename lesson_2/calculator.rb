@@ -51,7 +51,6 @@ def read_valid_operator
   end
 end
 
-
 def read_name
   loop do
     name = gets.chomp.strip
@@ -71,17 +70,20 @@ def compute(number1, number2, operator)
     number1 * number2
   when '4'
     number1 / number2
-  else
-    throw messages[:case_fail]
   end
 end
 
-def calculation
+def read_inputs
   number1 = read_valid_number messages[:enter_first_number]
   number2 = read_valid_number messages[:enter_second_number]
 
   prompt messages[:operator_prompt]
   operator = read_valid_operator
+  [number1, number2, operator]
+end
+
+def calculation
+  number1, number2, operator = read_inputs
 
   prompt "#{messages[:operation][operator.to_sym]} #{messages[:the_two_numbers]}"
   result = compute(number1, number2, operator)
@@ -93,7 +95,6 @@ def calculate_again?
   answer = gets.chomp
   answer.downcase.start_with? 'y'
 end
-
 
 prompt messages[:welcome]
 prompt messages[:name_please]
