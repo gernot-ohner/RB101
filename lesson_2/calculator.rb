@@ -20,18 +20,22 @@ def prompt(message)
   puts "=> #{message}"
 end
 
-def valid_operator?(operator)
-  (1..4).include? operator.to_i
+def valid_operator?(string)
+  (1..4).include? string.to_i
 end
 
-def number?(number)
-  /^-?\d+(\.\d+)?$/ =~ number
+def number?(string)
+  /^-?\d+(\.\d+)?$/ =~ string
+end
+
+def valid_name?(string)
+  !string.nil? && !string.empty?
 end
 
 def read_valid_number(message)
   loop do
     prompt message
-    number = Kernel.gets.chomp
+    number = gets.chomp
     return number.to_f if number?(number)
 
     prompt messages[:invalid_number]
@@ -40,10 +44,20 @@ end
 
 def read_valid_operator
   loop do
-    operator = Kernel.gets.chomp
+    operator = gets.chomp
     return operator if valid_operator?(operator)
 
     prompt messages[:invalid_operator]
+  end
+end
+
+
+def read_name
+  loop do
+    name = gets.chomp.strip
+    return name if valid_name?(name)
+
+    prompt messages[:invalid_name]
   end
 end
 
@@ -61,7 +75,6 @@ def compute(number1, number2, operator)
     throw messages[:case_fail]
   end
 end
-
 
 def calculation
   number1 = read_valid_number messages[:enter_first_number]
@@ -81,13 +94,13 @@ def calculate_again?
   answer.downcase.start_with? 'y'
 end
 
-def calculator
-  prompt messages[:welcome]
-  loop do
-    calculation
-    break unless calculate_again?
-  end
-  prompt messages[:goodbye]
-end
 
-calculator
+prompt messages[:welcome]
+prompt messages[:name_please]
+name = read_name
+prompt "#{messages[:hello]} #{name}!"
+loop do
+  calculation
+  break unless calculate_again?
+end
+prompt messages[:goodbye]
