@@ -1,45 +1,55 @@
 {
+  "input_language": "Please select your language ('en' for English, 'de' for German)",
   "en": {
-    "invalid_number": "That's not a valid number. Please try again:",
-    "case_fail": "This shouldn't happen.",
     "welcome": "Welcome to calculator!",
-    "enter_first_number" : "Enter the first number: ",
-    "enter_second_number" : "Enter the second number: ",
-    "invalid_operator" : "That is not a valid operator. Please try again: ",
-    "the_two_numbers" : "the two numbers.",
-    "calculate_again" : "Do you want to perform another calculation? (Y to calculate again)",
-    "goodbye" : "Thank you for using the calculator! Goodbye!",
-    "operation" : {
-      "1" : "Adding",
-      "2" : "Subtracting",
-      "3" : "Multiplying",
-      "4" : "Dividing"
+    "hello": "Hello",
+    "goodbye": "Thank you for using the calculator! Goodbye!",
+
+    "input_name": "Please enter your name: ",
+    "input_number": "Enter a number: ",
+    "input_operator": "What operation would you like to perform?\n    1) add\n    2) subtract\n    3) multiply\n    4) divide",
+    "input_repetition_answer": "Do you want to perform another calculation?",
+
+    "the_two_numbers": "the two numbers.",
+    "operation": {
+      "1": "Adding",
+      "2": "Subtracting",
+      "3": "Multiplying",
+      "4": "Dividing"
     },
-    "operator_prompt": "What operation would you like to perform?\n    1) add\n    2) subtract\n    3) multiply\n    4) divide",
-    "name_please" : "Please enter your name: ",
-    "invalid_name" : "That is not a valid name. Please try again: ",
-    "hello": "Hello"
+    "true_repetition_answers": ["y","yes"],
+    "false_repetition_answers": ["n","no"],
+
+    "invalid_name": "That is not a valid name. Please try again: ",
+    "invalid_operator": "That is not a valid operator. Please try again: ",
+    "invalid_number": "That's not a valid number. Please try again: ",
+    "invalid_repetition_answer": "That's not a valid answer. Please try again: ",
+    "case_fail": "This shouldn't happen."
   },
   "de": {
-    "invalid_number": "Das ist keine valide Zahl. Bitte versuchen Sie es nochmal: ",
-    "case_fail": "Das sollte nicht passieren.",
+    "hello": "Hallo",
     "welcome": "Willkommen zum Taschenrechner!",
-    "enter_first_number" : "Geben Sie die erste Zahl ein: ",
-    "enter_second_number" : "Geben Sie die zweite Zahl ein: ",
-    "invalid_operator" : "Das ist kein valider Operator. Bitte versuchen Sie es nochmal: ",
-    "the_two_numbers" : "die beiden Zahlen",
-    "calculate_again" : "Möchten Sie eine weitere Berechnung starten? (Y um nochmal zu rechnen)",
-    "goodbye" : "Vielen Dank, dass sie den Taschenrechner verwendet haben! Auf Wiedersehen!",
-    "operation" : {
-      "1" : "Addiere",
-      "2" : "Subtrahiere"
-,
-      "3" : "Multipliziere",
-      "4" : "Dividiere"
+    "goodbye": "Vielen Dank, dass sie den Taschenrechner verwendet haben! Auf Wiedersehen!",
+
+    "input_name": "Bitte geben Sie Ihren Namen ein: ",
+    "input_operator": "Welche Operation möchten Sie durchführen?\n    1) addieren\n    2) subtrahieren\n    3) multiplizieren\n    4) dividieren",
+    "input_number": "Geben Sie eine Zahl ein: ",
+    "input_repetition_answer": "Möchten Sie eine weitere Berechnung starten?",
+
+    "the_two_numbers": "die beiden Zahlen",
+    "operation": {
+      "1": "Addiere",
+      "2": "Subtrahiere",
+      "3": "Multipliziere",
+      "4": "Dividiere"
     },
-    "operator_prompt": "Welche Operation möchten Sie durchführen?\n    1) addieren\n    2) subtrahieren\n    3) multiplizieren\n    4) dividieren",
-    "name_please" : "Bitte geben Sie Ihren Namen ein: ",
-    "invalid_name": "Das war kein valider Name. Bitte versuchen Sie es nochmal: ",
-    "hello": "Hallo"
+    "true_repetition_answers": ["j","ja"],
+    "false_repetition_answers": ["n","nein"],
+
+    "invalid_name": "Das war kein gültiger Name. Bitte versuchen Sie es nochmal: ",
+    "invalid_number": "Das ist keine gültige Zahl. Bitte versuchen Sie es nochmal: ",
+    "invalid_operator": "Das ist kein gültiger Operator. Bitte versuchen Sie es nochmal: ",
+    "invalid_repetition_answer": "Das ist keine gültige Antwort. Bitte versuchen Sie es nochmal: ",
+    "case_fail": "Das sollte nicht passieren."
   }
 }

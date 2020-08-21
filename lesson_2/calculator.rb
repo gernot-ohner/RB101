@@ -10,21 +10,34 @@
 require 'json'
 file = File.read('./messages.json')
 MESSAGES = JSON.parse(file, symbolize_names: true)
-LANGUAGE = :de
-
-def messages
-  MESSAGES[LANGUAGE]
-end
 
 def prompt(message)
   puts "=> #{message}"
+end
+
+def valid_language?(string)
+  %(en de).include? string.downcase
+end
+
+def retrieve_language
+  loop do
+    prompt MESSAGES[:input_language]
+    input = gets.chomp
+    return input.to_sym if valid_language?(input)
+
+    prompt MESSAGES[:invalid_language]
+  end
+end
+
+def messages
+  MESSAGES[LANGUAGE]
 end
 
 def valid_operator?(string)
   (1..4).include? string.to_i
 end
 
-def number?(string)
+def valid_number?(string)
   /^-?\d+(\.\d+)?$/ =~ string
 end
 
@@ -32,31 +45,18 @@ def valid_name?(string)
   !string.nil? && !string.empty?
 end
 
-def read_valid_number(message)
-  loop do
-    prompt message
-    number = gets.chomp
-    return number.to_f if number?(number)
-
-    prompt messages[:invalid_number]
-  end
+def valid_repetition_answer?(string)
+  (messages[:true_repetition_answers] + messages[:false_repetition_answers])
+    .include?(string.downcase)
 end
 
-def read_valid_operator
+def retrieve_input(input_type)
   loop do
-    operator = gets.chomp
-    return operator if valid_operator?(operator)
+    prompt messages["input_#{input_type}".to_sym]
+    input = gets.chomp
+    return input if method("valid_#{input_type}?".to_sym).call(input)
 
-    prompt messages[:invalid_operator]
-  end
-end
-
-def read_name
-  loop do
-    name = gets.chomp.strip
-    return name if valid_name?(name)
-
-    prompt messages[:invalid_name]
+    prompt messages["invalid_#{input_type}".to_sym]
   end
 end
 
@@ -73,35 +73,28 @@ def compute(number1, number2, operator)
   end
 end
 
-def read_inputs
-  number1 = read_valid_number messages[:enter_first_number]
-  number2 = read_valid_number messages[:enter_second_number]
-
-  prompt messages[:operator_prompt]
-  operator = read_valid_operator
+def retrieve_inputs
+  number1 = retrieve_input('number').to_f
+  number2 = retrieve_input('number').to_f
+  operator = retrieve_input('operator')
   [number1, number2, operator]
 end
 
-def calculation
-  number1, number2, operator = read_inputs
+def calculate_again?
+  answer = retrieve_input('repetition_answer')
+  messages[:true_repetition_answers].include? answer.downcase
+end
 
+LANGUAGE = retrieve_language
+prompt messages[:welcome]
+name = retrieve_input('name')
+prompt "#{messages[:hello]} #{name}!"
+
+loop do
+  number1, number2, operator = retrieve_inputs
   prompt "#{messages[:operation][operator.to_sym]} #{messages[:the_two_numbers]}"
   result = compute(number1, number2, operator)
   puts result
-end
-
-def calculate_again?
-  prompt messages[:calculate_again]
-  answer = gets.chomp
-  answer.downcase.start_with? 'y'
-end
-
-prompt messages[:welcome]
-prompt messages[:name_please]
-name = read_name
-prompt "#{messages[:hello]} #{name}!"
-loop do
-  calculation
   break unless calculate_again?
 end
 prompt messages[:goodbye]
