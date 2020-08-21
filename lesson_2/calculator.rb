@@ -69,7 +69,11 @@ def compute(number1, number2, operator)
   when '3'
     number1 * number2
   when '4'
-    number1 / number2
+    if number2.zero?
+      messages[:division_by_zero]
+    else
+      number1 / number2
+    end
   end
 end
 
@@ -97,4 +101,5 @@ loop do
   puts result
   break unless calculate_again?
 end
+
 prompt messages[:goodbye]

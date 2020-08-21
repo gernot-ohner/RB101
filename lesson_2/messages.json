@@ -19,6 +19,7 @@
     },
     "true_repetition_answers": ["y","yes"],
     "false_repetition_answers": ["n","no"],
+    "division_by_zero": "You can't divide by zero.",
 
     "invalid_name": "That is not a valid name. Please try again: ",
     "invalid_operator": "That is not a valid operator. Please try again: ",
@@ -45,6 +46,7 @@
     },
     "true_repetition_answers": ["j","ja"],
     "false_repetition_answers": ["n","nein"],
+    "division_by_zero": "Division durch 0 ist nicht möglich.",
 
     "invalid_name": "Das war kein gültiger Name. Bitte versuchen Sie es nochmal: ",
     "invalid_number": "Das ist keine gültige Zahl. Bitte versuchen Sie es nochmal: ",
