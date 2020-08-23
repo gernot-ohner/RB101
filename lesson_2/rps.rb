@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-VALID_CHOICES = %w[rock paper scissors].freeze
+VALID_CHOICES = %w[rock paper scissors lizard spock].freeze
 
 def prompt(message)
   puts "=> #{message}"
@@ -11,9 +11,11 @@ def valid_choice?(string)
 end
 
 def win?(player, computer)
-  (player == 'rock' && computer == 'scissors') ||
-    (player == 'paper' && computer == 'rock') ||
-    (player == 'scissors' && computer == 'paper')
+  (player == 'rock' && (computer == 'scissors' || computer == 'lizard')) ||
+    (player == 'paper' && (computer == 'rock' || computer == 'spock')) ||
+    (player == 'scissors' && (computer == 'paper' || computer == 'lizard')) ||
+    (player == 'spock' && (computer == 'rock' || computer == 'scissors')) ||
+    (player == 'lizard' && (computer == 'spock' || computer == 'paper'))
 end
 
 def display_results(player, computer)
