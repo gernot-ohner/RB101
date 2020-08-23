@@ -10,6 +10,14 @@ X_BEATS_Y = {
   spock: %i[rock scissors]
 }.freeze
 
+MESSAGES = {
+  player_wins: 'You win!',
+  computer_wins: 'The computer wins!',
+  tie: "It's a tie!",
+  invalid_choice: "That's not a valid choice!",
+  thanks: 'Thank you for playing!'
+}.freeze
+
 def construct_prefixes(symbol)
   (0...symbol.to_s.length).map { |i| symbol.to_s[0..i] }
 end
@@ -27,7 +35,6 @@ end
 
 PREFIXES = unambiguous_prefixes(VALID_CHOICES)
 
-
 def prompt(message)
   puts "=> #{message}"
 end
@@ -44,13 +51,31 @@ def win?(player, computer)
   X_BEATS_Y[player.to_sym].include? computer.to_sym
 end
 
-def display_results(player, computer)
+def compute_results(player, computer)
   if win?(player, computer)
-    prompt 'You won!'
+    :player_wins
   elsif win?(computer, player)
-    prompt 'Computer won!'
+    :computer_wins
   else
-    prompt "It's a tie!"
+    :tie
+  end
+end
+
+def display_results(result, score)
+  prompt MESSAGES[result]
+  prompt "The current score is player: #{score[:player_wins]}, computer: #{score[:computer_wins]}"
+end
+
+def compute_score(score, result)
+  score[result] = score[result] + 1
+  score
+end
+
+def determine_winner(score)
+  if score[:player_wins] >= 5
+    'Player'
+  elsif score[:computer_wins] >= 5
+    'Computer'
   end
 end
 
@@ -61,23 +86,26 @@ def retrieve_valid_choice
 
     return choice if valid_choice? choice
 
-    prompt("That's not a valid choice")
+    prompt MESSAGES[:invalid_choice]
   end
 end
 
+score = { player_wins: 0, computer_wins: 0, tie: 0 }
 loop do
-  choice = retrieve_valid_choice
-
+  player_choice = retrieve_valid_choice
   computer_choice = VALID_CHOICES.sample
 
-  prompt "You chose #{choice}, computer chose #{computer_choice}"
+  prompt "You chose #{player_choice}, computer chose #{computer_choice}"
 
-  display_results(choice, computer_choice)
+  result = compute_results(player_choice, computer_choice)
+  score = compute_score(score, result)
+  display_results(result, score)
 
-  prompt 'Do you want to play again?'
-
-  answer = gets.chomp
-  break unless answer.downcase.start_with? 'y'
+  winner = determine_winner(score)
+  unless winner.nil?
+    prompt "#{winner} wins!"
+    break
+  end
 end
 
-prompt 'Thank you for playing!'
+prompt MESSAGES[:thanks]
