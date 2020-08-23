@@ -19,8 +19,9 @@
 
 def repeat(string, n)
   return if n <= 0
+
   i = 0
-  result = ""
+  result = ''
   until i == n
     if i == n - 1
       result << string
@@ -34,6 +35,7 @@ end
 
 def better_repeat(string, n)
   return if n <= 0
+
   (1..n).reduce("") { |accumulator, _| accumulator + "#{string}\n" }.chomp
 end
 
