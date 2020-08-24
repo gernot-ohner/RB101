@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+WIN_AMOUNT = 5
 VALID_CHOICES = %i[rock paper scissors lizard spock].freeze
 
 X_BEATS_Y = {
@@ -11,11 +12,13 @@ X_BEATS_Y = {
 }.freeze
 
 MESSAGES = {
+  welcome: "Welcome to the worlds greatest rock paper scissors lizard spock tournament!
+Man versus the Machine, until one of them has 5 wins!",
   player_wins: 'You win!',
   computer_wins: 'The computer wins!',
   tie: "It's a tie!",
   invalid_choice: "That's not a valid choice!",
-  thanks: 'Thank you for playing!'
+  goodbye: 'Thank you for playing! Goodbye!'
 }.freeze
 
 def construct_prefixes(symbol)
@@ -72,9 +75,9 @@ def compute_score(score, result)
 end
 
 def determine_winner(score)
-  if score[:player_wins] >= 5
+  if score[:player_wins] >= WIN_AMOUNT
     'Player'
-  elsif score[:computer_wins] >= 5
+  elsif score[:computer_wins] >= WIN_AMOUNT
     'Computer'
   end
 end
@@ -90,22 +93,57 @@ def retrieve_valid_choice
   end
 end
 
-score = { player_wins: 0, computer_wins: 0, tie: 0 }
-loop do
-  player_choice = retrieve_valid_choice
-  computer_choice = VALID_CHOICES.sample
-
-  prompt "You chose #{player_choice}, computer chose #{computer_choice}"
-
-  result = compute_results(player_choice, computer_choice)
-  score = compute_score(score, result)
-  display_results(result, score)
-
-  winner = determine_winner(score)
-  unless winner.nil?
-    prompt "#{winner} wins!"
-    break
-  end
+def display_welcome
+  prompt MESSAGES[:welcome]
 end
 
-prompt MESSAGES[:thanks]
+
+def display_choices(computer_choice, player_choice)
+  prompt "You chose #{player_choice}, computer chose #{computer_choice}"
+end
+
+def display_winner(winner)
+  prompt "The #{winner} wins the grand tournament!"
+end
+
+def display_goodbye
+  prompt MESSAGES[:goodbye]
+end
+
+def someone_won?(score)
+  score[:player_wins] >= WIN_AMOUNT || score[:computer_wins] >= WIN_AMOUNT
+end
+
+def retrieve_choices
+  player_choice = retrieve_valid_choice
+  computer_choice = VALID_CHOICES.sample
+  [computer_choice, player_choice]
+end
+
+def tournament
+  score = { player_wins: 0, computer_wins: 0, tie: 0 }
+  display_welcome
+  until someone_won?(score)
+    computer_choice, player_choice = retrieve_choices
+
+    display_choices(computer_choice, player_choice)
+
+    result = compute_results(player_choice, computer_choice)
+    score = compute_score(score, result)
+    display_results(result, score)
+  end
+  display_winner(determine_winner(score))
+end
+
+loop do
+
+  tournament
+  prompt 'Do you want to play another tournament?'
+  answer = gets.chomp
+
+  break unless answer.downcase.start_with? 'y'
+
+end
+
+
+display_goodbye
